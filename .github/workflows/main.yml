@@ -35,20 +35,20 @@ jobs:
           databricks repos update "${{ env.REPO_PATH }}" \
           --branch "${{ steps.extract_branch.outputs.branch }}"
 
-deploy-prod:
-  needs: deploy-dev
-  runs-on: ubuntu-latest
-  environment: production
-  env:
-    DATABRICKS_HOST: ${{ secrets.PROD_DEPLOYMENT_TARGET_URL }}
-    DATABRICKS_TOKEN: ${{ secrets.PROD_DEPLOYMENT_TARGET_TOKEN }}
-    REPO_PATH: /Workspace/Users/sumit.raj93@outlook.com/PROD-Databricks-GIT-FOLDER
-
-  steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
-
-    - name: Set up Python
-      uses: actions/setup-python@v3
-      with:
-        python-version: 3.8
+  deploy-prod:
+    needs: deploy-dev
+    runs-on: ubuntu-latest
+    environment: production
+    env:
+      DATABRICKS_HOST: ${{ secrets.PROD_DEPLOYMENT_TARGET_URL }}
+      DATABRICKS_TOKEN: ${{ secrets.PROD_DEPLOYMENT_TARGET_TOKEN }}
+      REPO_PATH: /Workspace/Users/sumit.raj93@outlook.com/PROD-Databricks-GIT-FOLDER
+  
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+  
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: 3.8
